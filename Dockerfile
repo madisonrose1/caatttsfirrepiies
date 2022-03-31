@@ -1,13 +1,10 @@
 FROM sandy1709/catuserbot:slim-buster
 
-#clonning repo 
-RUN git clone https://github.com/deepaiims/katssssssss.git /root/userbot
-#working directory 
-WORKDIR /root/userbot
+COPY . .
 
 # Install requirements
-RUN pip3 install -U -r requirements.txt
+RUN python3 -m ensurepip --default-pip &&\
+    python3 -m pip install --upgrade pip wheel setuptools &&\
+    python3 -m pip install -r requirements.txt
 
-ENV PATH="/home/userbot/bin:$PATH"
-
-CMD ["python3","-m","userbot"]
+CMD ["bash","start"]
